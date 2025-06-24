@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZakMedCare | Where Healthcare Careers Take Off</title>
+  <meta name="description" content="Leading medical recruitment agency connecting healthcare professionals with top hospitals and clinics in UAE, Gulf, and India. Expert assistance for HAAD, MOH, DHA exams.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../zakmedcare/js/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="images/logokaki.png">
+
+
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e40af',
+            secondary: '#059669',
+            accent: '#7c3aed'
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-in-out',
+            'slide-up': 'slideUp 0.8s ease-out',
+            'float': 'float 3s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+      <style>
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .gradient-bg {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .medical-pattern {
+          background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f9ff' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+      </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+    <nav class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+   
+<div class="flex items-center space-x-4">
+  <div>
+    <img src="images/logokaki.png" alt="ZakMedCare Logo" class="h-32 w-32 object-contain bg-white rounded-full border-4 border-green-500 shadow-xl p-2" />
+  </div>
+  <div>
+    <div class="flex items-center">
+      <span class="text-2xl md:text-3xl font-bold text-primary">Zak</span>
+      <span class="text-2xl md:text-3xl font-bold text-secondary">MedCare</span>
+    </div>
+    <p class="text-sm text-slate-600 font-medium">Where Healthcare Careers Take Off</p>
+  </div>
+</div>
+
+        <!-- Navigation Menu -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <a href="#services" class="text-slate-700 hover:text-primary transition-colors font-medium">Services</a>
+          <a href="#roles" class="text-slate-700 hover:text-primary transition-colors font-medium">Medical Roles</a>
+            <a href="#career" class="text-slate-700 hover:text-primary transition-colors font-medium">Job-Openings</a>
+          <a href="#process" class="text-slate-700 hover:text-primary transition-colors font-medium">Process</a>
+          <a href="#testimonials" class="text-slate-700 hover:text-primary transition-colors font-medium">Success Stories</a>
+          <a href="https://wa.me/971567867569" target="_blank" rel="noopener" 
+             class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center space-x-2 shadow-lg transition-all hover:scale-105">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.52 3.48A12 12 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6l-1.67 6.14a1 1 0 0 0 1.25 1.26l6.14-1.68A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12a11.97 11.97 0 0 0-3.48-8.52z"/>
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+          <!-- Admin Button -->
+          <a href="admin.html"
+          class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full font-medium flex items-center space-x-2 shadow transition-all hover:scale-105">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" />
+          </svg>
+          <span>Admin</span>
+        </a>
+
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+      <button class="lg:hidden text-slate-700 hover:text-primary" onclick="toggleMobileMenu()">
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4 border-t border-slate-200">
+  <div class="flex flex-col space-y-3 pt-4">
+    <a href="#services" class="text-slate-700 hover:text-primary transition-colors font-medium">Services</a>
+    <a href="#roles" class="text-slate-700 hover:text-primary transition-colors font-medium">Medical Roles</a>
+    <a href="#career" class="text-slate-700 hover:text-primary transition-colors font-medium">Job-Openings</a>
+        <a href="#process" class="text-slate-700 hover:text-primary transition-colors font-medium">Process</a>
+
+    <a href="#testimonials" class="text-slate-700 hover:text-primary transition-colors font-medium">Success Stories</a>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/971567867569" target="_blank" rel="noopener"
+       class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center space-x-2 shadow-lg transition-all w-fit">
+      <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.52 3.48A12 12 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6l-1.67 6.14a1 1 0 0 0 1.25 1.26l6.14-1.68A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12a11.97 11.97 0 0 0-3.48-8.52z"/>
+      </svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <!-- Admin Button -->
+    <a href="admin.html"
+   class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full font-semibold flex items-center justify-center space-x-2 shadow-lg transition-all w-fit">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 20v-1a4 4 0 014-4h4a4 4 0 014 4v1" />
+  </svg>
+  <span>Admin</span>
+</a>
+
+  </div>
+</div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="gradient-bg medical-pattern py-20 lg:py-32">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+  <div class="lg:w-1/2 text-sky-500 animate-slide-up">
+  <h1 class="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+    Where Healthcare 
+    <span class="text-green-300">Careers</span> 
+    Take Flight
+  </h1>
+    <p class="text-xl lg:text-2xl mb-8 text-blue-500 leading-relaxed">
+    Empowering doctors, nurses, and healthcare professionals to find life-changing opportunities across the UAE, Gulf, and India.
+  </p>
+  <div class="flex flex-col sm:flex-row gap-4">
+    <a href="#roles" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all hover:scale-105 text-center">
+      Explore Opportunities
+    </a>
+    <a href="https://wa.me/971567867569" target="_blank" rel="noopener" 
+       class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg transition-all hover:scale-105 flex items-center justify-center space-x-2">
+      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.52 3.48A12 12 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6l-1.67 6.14a1 1 0 0 0 1.25 1.26l6.14-1.68A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12a11.97 11.97 0 0 0-3.48-8.52z"/>
+      </svg>
+      <span>Get Started</span>
+    </a>
+  </div>
+</div>
+        <div class="lg:w-1/2 animate-float">
+          <div class="relative">
+            <div class="bg-white p-8 rounded-3xl shadow-2xl">
+              <div class="grid grid-cols-2 gap-6">
+                <div class="text-center p-4 bg-blue-50 rounded-xl">
+                  <div class="text-3xl font-bold text-blue-600">500+</div>
+                  <div class="text-sm text-slate-600">Successful Placements</div>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-xl">
+                  <div class="text-3xl font-bold text-green-600">50+</div>
+                  <div class="text-sm text-slate-600">Partner Hospitals</div>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-xl">
+                  <div class="text-3xl font-bold text-purple-600">95%</div>
+                  <div class="text-sm text-slate-600">Success Rate</div>
+                </div>
+                <div class="text-center p-4 bg-orange-50 rounded-xl">
+                  <div class="text-3xl font-bold text-orange-600">24/7</div>
+                  <div class="text-sm text-slate-600">Support</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section id="services" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-800 mb-4">Our Services</h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">Comprehensive recruitment solutions tailored for healthcare professionals and medical institutions</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
+          <div class="h-16 w-16 bg-blue-500 rounded-xl flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L13.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L10.91 8.26L12 2Z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-800 mb-4">For Healthcare Professionals</h3>
+          <ul class="text-slate-600 space-y-2">
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Career Guidance & Consultation</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Job Matching & Placement</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Interview Preparation</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Post-Placement Support</li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
+          <div class="h-16 w-16 bg-green-500 rounded-xl flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M19 19H5V5H19V19Z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-800 mb-4">For Healthcare Institutions</h3>
+          <ul class="text-slate-600 space-y-2">
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Talent Sourcing & Screening</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Bulk Hiring Solutions</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Specialized Recruitment</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Ongoing Partnership</li>
+          </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2">
+          <div class="h-16 w-16 bg-purple-500 rounded-xl flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20M15.88 8.29L10 14.17L8.12 12.29C7.73 11.9 7.1 11.9 6.71 12.29S6.32 13.28 6.71 13.67L9.3 16.3C9.69 16.69 10.32 16.69 10.71 16.3L17.3 9.71C17.69 9.32 17.69 8.69 17.3 8.3C16.91 7.91 16.27 7.91 15.88 8.29Z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-800 mb-4">Licensing & Certification</h3>
+          <ul class="text-slate-600 space-y-2">
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>HAAD/MOH/DHA Exam Prep</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Good Standing Certificates</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Document Verification</li>
+            <li class="flex items-center"><svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>Complete Assistance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Image upload -->
+ 
+
+
+  <!-- Medical Roles Section -->
+  <section id="roles" class="py-20 bg-slate-100">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-800 mb-4">Healthcare Specializations</h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">We recruit across all major medical and healthcare disciplines</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Doctors -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 group">
+          <div class="text-center mb-4">
+            <div class="h-20 w-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-3xl">👨‍⚕️</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Doctors</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1">
+            <li>• General Physicians</li>
+            <li>• Surgeons (All Specialties)</li>
+            <li>• Pediatricians</li>
+            <li>• Gynecologists</li>
+            <li>• Anesthesiologists</li>
+            <li>• Radiologists</li>
+            <li>• Emergency Medicine</li>
+            <li>• Specialists & Consultants</li>
+          </ul>
+        </div>
+
+        <!-- Nurses -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 group">
+          <div class="text-center mb-4">
+            <div class="h-20 w-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-3xl">👩‍⚕️</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Nurses</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1">
+            <li>• Registered Nurses (RN)</li>
+            <li>• Staff Nurses</li>
+            <li>• ICU/CCU Nurses</li>
+            <li>• Emergency Room Nurses</li>
+            <li>• Operating Theatre Nurses</li>
+            <li>• Pediatric Nurses</li>
+            <li>• Nurse Practitioners</li>
+            <li>• Charge Nurses</li>
+          </ul>
+        </div>
+
+        <!-- Allied Health -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 group">
+          <div class="text-center mb-4">
+            <div class="h-20 w-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-3xl">🔬</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Allied Health</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1">
+            <li>• Lab Technicians</li>
+            <li>• Radiographers</li>
+            <li>• Physiotherapists</li>
+            <li>• Respiratory Therapists</li>
+            <li>• Medical Technologists</li>
+            <li>• Dialysis Technicians</li>
+            <li>• Pharmacists</li>
+            <li>• Technicians (All Types)</li>
+          </ul>
+        </div>
+
+        <!-- Support Staff -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 group">
+          <div class="text-center mb-4">
+            <div class="h-20 w-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span class="text-3xl">🏥</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Support Staff</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1">
+            <li>• Healthcare Assistants</li>
+            <li>• Medical Secretaries</li>
+            <li>• Administrative Staff</li>
+            <li>• Patient Coordinators</li>
+            <li>• Quality Assurance</li>
+            <li>• Medical Records</li>
+            <li>• Customer Service</li>
+            <li>• Management Roles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!------->
+
+<section id="career" class="py-20 bg-slate-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+        🩺 Medical Careers - Job Openings
+      </h2>
+      <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Explore rewarding healthcare opportunities and join leading hospitals and clinics.
+        <br class="hidden sm:block">
+        Click on an image to view it larger.
+      </p>
+    </div>
+
+    <div id="jobsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Job cards will be dynamically injected here -->
+    </div>
+  </div>
+
+  <!-- Modal for Image Preview -->
+  <div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden transition-all duration-300">
+    <span onclick="closeImgModal()" class="absolute top-8 right-8 text-white text-4xl font-bold cursor-pointer select-none hover:text-red-400 transition">&times;</span>
+    <img id="modalImage" class="max-w-4xl max-h-[90vh] w-full h-auto object-contain rounded-2xl shadow-2xl border-4 border-white bg-white transition-all duration-300" src="" alt="Preview">
+  </div>
+</section>
+
+<script>
+  let jobs = [];
+  if (localStorage.getItem('jobs')) {
+    jobs = JSON.parse(localStorage.getItem('jobs'));
+  }
+
+  function isImageOnly(job) {
+    // Only image is present, all other fields are empty or falsy
+    const fields = ["title","position","industry","location","salary","experience","candidates","license","gender","description"];
+    return job.image && fields.every(f => !job[f] || job[f].toString().trim() === "");
+  }
+
+  function renderJobs() {
+    const container = document.getElementById('jobsList');
+    if (!jobs.length) {
+      container.innerHTML = `<p class="text-center text-gray-500 col-span-full">No job openings available yet.</p>`;
+      return;
+    }
+    container.innerHTML = jobs.map((job, idx) => {
+      // Case 1: Only image is present
+      if (isImageOnly(job)) {
+        return `
+          <div class="bg-white rounded-xl shadow-md p-0 flex flex-col items-center overflow-hidden">
+            <img src="${job.image}" alt="Job Image" class="w-full h-80 object-contain cursor-pointer" onclick="showImgModal('${encodeURIComponent(job.image)}')">
+          </div>
+        `;
+      }
+      // Case 2: Regular job card with image (if any)
+      return `
+        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+          ${job.image ? `<img src="${job.image}" alt="Company Logo" class="w-24 h-24 object-cover rounded-lg border mb-3 cursor-pointer" onclick="showImgModal('${encodeURIComponent(job.image)}')">` : ''}
+          <div class="flex-1 w-full flex flex-col items-center">
+            <div class="flex flex-wrap items-center gap-2 mb-1 justify-center">
+              <span class="text-lg font-semibold text-blue-700">${job.title || ''}</span>
+              ${job.position ? `<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded">${job.position}</span>` : ''}
+              ${job.industry ? `<span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">${job.industry}</span>` : ''}
+            </div>
+            <div class="text-gray-700 font-medium mb-1 text-center">
+              ${job.location || ''}${job.salary ? ` &middot; <span class="text-green-700">${job.salary} AED</span>` : ''}
+            </div>
+            <div class="text-gray-500 text-sm mb-1 text-center">
+              ${job.experience ? `<b>Experience:</b> ${job.experience} &middot; ` : ''}
+              ${job.candidates ? `<b>Needed:</b> ${job.candidates} &middot; ` : ''}
+              ${job.gender ? `<b>Gender:</b> ${job.gender}` : ''}
+            </div>
+            <div class="text-gray-500 text-sm mb-1 text-center">
+              ${job.license ? `<b>License:</b> ${job.license}` : ''}
+            </div>
+            <div class="text-gray-600 mt-2 text-center">${job.description || ''}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+  $("#imageInput").on("change", function () {
+    const input = this;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e){
+        $("#imagePreview").attr("src", e.target.result);
+        $("#imagePreviewWrap").removeClass("hidden");
+      }
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      $("#imagePreviewWrap").addClass("hidden");
+    }
+  });
+    $("#clearImageBtn").on("click", function() {
+    $("#imageInput").val('');
+    $("#imagePreview").attr("src", "#");
+    $("#imagePreviewWrap").addClass("hidden");
+  });
+ function showImgModal(src) {
+    $("#modalImage").attr("src", src);
+    $("#imgModal").removeClass("hidden");
+    document.body.style.overflow = 'hidden';
+  }
+  function closeImgModal() {
+    $("#imgModal").addClass("hidden");
+    $("#modalImage").attr("src", "");
+    document.body.style.overflow = '';
+  }
+  window.showImgModal = showImgModal;
+  window.closeImgModal = closeImgModal;
+  document.addEventListener('keydown', function(e){
+    if(e.key === "Escape") closeImgModal();
+  });
+  // Modal functions
+  function showImgModal(imgSrc) {
+    document.getElementById('modalImage').src = decodeURIComponent(imgSrc);
+    document.getElementById('imgModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeImgModal() {
+    document.getElementById('imgModal').classList.add('hidden');
+    document.getElementById('modalImage').src = '';
+    document.body.style.overflow = '';
+  }
+  // Close modal on ESC
+  document.addEventListener('keydown', function(e){
+    if(e.key === "Escape") closeImgModal();
+  });
+
+  window.showImgModal = showImgModal;
+  window.closeImgModal = closeImgModal;
+
+  renderJobs();
+</script>
+
+
+  <!-- Process Section -->
+  <section id="process" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-800 mb-4">Our Recruitment Process</h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">A streamlined, comprehensive approach to healthcare recruitment</p>
+      </div>
+
+      <!-- Process Flow -->
+      <div class="relative">
+        <!-- Timeline Line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-green-500 hidden lg:block"></div>
+        
+        <div class="space-y-12">
+          <!-- Step 1 -->
+          <div class="flex flex-col lg:flex-row items-center gap-8">
+            <div class="lg:w-1/2 lg:text-right lg:pr-8">
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4">1. Initial Consultation</h3>
+                <p class="text-slate-600 mb-4">We begin with a comprehensive consultation to understand your career goals, qualifications, and preferences. Our experts assess your profile and guide you on the best opportunities.</p>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• Career assessment and planning</li>
+                  <li>• Document review and verification</li>
+                  <li>• Opportunity matching</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative z-10 lg:w-auto">
+              <div class="h-16 w-16 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lg:w-1/2 lg:pl-8">
+              <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg">
+                <h3 class="text-2xl font-bold text-green-700 mb-4">2. Licensing Support</h3>
+                <p class="text-slate-600 mb-4">Complete assistance with medical licensing exams and certifications required for your target country. We provide study materials, mock tests, and expert guidance.</p>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• HAAD/MOH/DHA exam preparation</li>
+                  <li>• Good Standing Certificate assistance</li>
+                  <li>• Documentation support</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex flex-col lg:flex-row-reverse items-center gap-8">
+            <div class="lg:w-1/2 lg:text-left lg:pl-8">
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-lg">
+                <h3 class="text-2xl font-bold text-purple-700 mb-4">3. Job Matching</h3>
+                <p class="text-slate-600 mb-4">Our advanced matching system connects you with the most suitable opportunities based on your skills, experience, and career aspirations.</p>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• Personalized job recommendations</li>
+                  <li>• Salary negotiation support</li>
+                  <li>• Contract review assistance</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative z-10 lg:w-auto">
+              <div class="h-16 w-16 bg-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                <svg class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lg:w-1/2 lg:pr-8">
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl shadow-lg">
+                <h3 class="text-2xl font-bold text-orange-700 mb-4">4. Placement & Support</h3>
+                <p class="text-slate-600 mb-4">From interview preparation to final placement, we ensure a smooth transition. Our support continues even after you start your new role.</p>
+                <ul class="text-sm text-slate-600 space-y-2">
+                  <li>• Interview coaching and preparation</li>
+                  <li>• Visa and immigration assistance</li>
+                  <li>• Post-placement support and follow-up</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 bg-slate-100">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-800 mb-4">Success Stories</h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">Hear from our successfully placed healthcare professionals</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+          <div class="flex items-center mb-6">
+            <div class="h-12 w-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-bold text-lg">AK</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-800">Ayesha Khan</h4>
+              <p class="text-sm text-slate-600">Registered Nurse</p>
+            </div>
+          </div>
+          <p class="text-slate-600 italic mb-4">"ZakMedCare made my dream of working in Dubai a reality. Their support throughout the licensing process was exceptional, and I landed a position at a top hospital within 3 months."</p>
+          <div class="flex text-yellow-400">
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+          <div class="flex items-center mb-6">
+            <div class="h-12 w-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-bold text-lg">DS</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-800">Dr. Sarah Ahmed</h4>
+              <p class="text-sm text-slate-600">General Physician</p>
+            </div>
+          </div>
+          <p class="text-slate-600 italic mb-4">"Professional service from start to finish. The team helped me navigate the MOH exam process and secured me a position at a prestigious hospital in Abu Dhabi. Highly recommended!"</p>
+          <div class="flex text-yellow-400">
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+          <div class="flex items-center mb-6">
+            <div class="h-12 w-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-bold text-lg">MR</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-800">Mohammed Rafiq</h4>
+              <p class="text-sm text-slate-600">Lab Technician</p>
+            </div>
+          </div>
+          <p class="text-slate-600 italic mb-4">"Excellent support throughout my job search. The team understood my requirements and connected me with the perfect opportunity. Now working at a leading hospital in Dubai!"</p>
+          <div class="flex text-yellow-400">
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold text-white mb-6">Ready to Advance Your Healthcare Career?</h2>
+        <p class="text-xl text-blue-100 mb-8">Join thousands of healthcare professionals who have found their dream jobs through ZakMedCare. Let's discuss how we can help you achieve your career goals.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <a href="https://wa.me/971567867569" target="_blank" rel="noopener"
+             class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg transition-all hover:scale-105 flex items-center space-x-3">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.52 3.48A12 12 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6l-1.67 6.14a1 1 0 0 0 1.25 1.26l6.14-1.68A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12a11.97 11.97 0 0 0-3.48-8.52z"/>
+            </svg>
+            <span>Start Your Journey on WhatsApp</span>
+          </a>
+          <a href="tel:+971567867569" 
+             class="bg-white text-blue-700 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center space-x-3">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <span>Call Now</span>
+          </a>
+        </div>
+
+        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+          <h3 class="text-2xl font-bold text-white mb-4">Contact Information</h3>
+          <div class="space-y-3 text-blue-100">
+            <div class="flex items-center justify-center space-x-3">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span class="font-semibold">+971 567 867 569</span>
+            </div>
+            <div class="flex items-center justify-center space-x-3">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+              </svg>
+              <span>UAE, Gulf & India</span>
+            </div>
+            <div class="flex items-center justify-center space-x-3">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.373-12 12 0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.627-5.373-12-12-12zm-2 17l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>24/7 Support Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300 py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8">
+<div class="md:col-span-2">
+  <div class="flex items-center space-x-3 mb-4">
+    <div>
+      <img src="images/logokaki.png" alt="ZakMedCare Logo"
+           class="h-32 w-32 object-contain bg-white rounded-full border-4 border-green-500 shadow-xl p-2" />
+    </div>
+    <div>
+      <span class="text-2xl font-bold text-white">ZakMedCare</span>
+      <p class="text-sm text-slate-400"> Where Healthcare Careers Take Off</p>
+    </div>
+  </div>
+  <p class="text-slate-400 mb-4">Connecting exceptional healthcare talent with world-class opportunities. Your trusted partner in healthcare recruitment across UAE, Gulf, and India.</p>
+  <div class="flex space-x-4">
+    <a href="https://wa.me/971567867569" target="_blank" rel="noopener" class="text-green-400 hover:text-green-300 transition-colors">
+      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.52 3.48A12 12 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6l-1.67 6.14a1 1 0 0 0 1.25 1.26l6.14-1.68A11.96 11.96 0 0 0 12 24c6.63 0 12-5.37 12-12a11.97 11.97 0 0 0-3.48-8.52z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+        
+        <div>
+          <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#services" class="hover:text-white transition-colors">Our Services</a></li>
+            <li><a href="#roles" class="hover:text-white transition-colors">Medical Roles</a></li>
+            <li><a href="#process" class="hover:text-white transition-colors">Our Process</a></li>
+            <li><a href="#testimonials" class="hover:text-white transition-colors">Success Stories</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center space-x-2">
+              <svg class="h-4 w-4 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>+971 567 867 569</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg class="h-4 w-4 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+              </svg>
+              <span>UAE, Gulf & India</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg class="h-4 w-4 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.373-12 12 0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.627-5.373-12-12-12zm-2 17l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span>24/7 Support</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-slate-700 mt-8 pt-8 text-center">
+        <p class="text-slate-400">&copy; 2025 <span class="text-green-400 font-semibold">ZakMedCare</span>. All rights reserved. | Where Healthcare Careers Take Off</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add scroll effect to header
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.classList.add('bg-white/95', 'backdrop-blur-sm');
+      } else {
+        header.classList.remove('bg-white/95', 'backdrop-blur-sm');
+      }
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards and sections
+    document.querySelectorAll('.bg-white, .bg-gradient-to-br').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
