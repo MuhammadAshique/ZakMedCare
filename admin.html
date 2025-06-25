@@ -390,6 +390,7 @@
                 };
                 jobs.unshift(job); // Add to top
                 localStorage.setItem('jobs', JSON.stringify(jobs));
+                updateJobsJsonOnServer(jobs);
                 $('#uploadStatus').text("Job posted successfully! Redirecting...").addClass('text-green-700');
                 $('#uploadForm')[0].reset();
                 $("#imagePreviewWrap").addClass("hidden");
@@ -502,6 +503,32 @@
         }
         window.editJob = editJob;
         window.deleteJob = deleteJob;
+
+        
+    async function updateJobsJsonOnServer(jobs) {
+      try {
+        const response = await fetch('/.netlify/functions/updateJobsJson', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(jobs)
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('❌ Server responded with error:', errorText);
+          alert('Failed to update jobs.json on server.');
+        } else {
+          console.log('✅ jobs.json successfully updated on GitHub!');
+          alert('Jobs saved to server successfully.');
+        }
+      } catch (err) {
+        console.error('⚠️ Error calling server function:', err);
+        alert('Something went wrong while saving jobs to the server.');
+      }
+    }
+
     </script>
     <script>
         // Example new job data
