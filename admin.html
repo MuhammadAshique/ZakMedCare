@@ -257,13 +257,16 @@
         $('#loginBtn').click(async function () {
             hideError();
             $('#loginBox input[type="text"], #loginBox input[type="password"]').removeClass('form-error');
-            if (!$('#username').val().trim()) {
+
+            const user = $('#username').val().trim();
+            const pass = $('#password').val().trim();
+
+            if (!user) {
                 $('#username').addClass('form-error');
                 showError("Please enter username.");
                 return;
             }
-
-            if (!$('#password').val().trim()) {
+            if (!pass) {
                 $('#password').addClass('form-error');
                 showError("Please enter password.");
                 return;
