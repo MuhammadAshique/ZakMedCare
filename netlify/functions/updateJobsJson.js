@@ -19,12 +19,21 @@ exports.handler = async (event) => {
     const fileRes = await fetch(fileUrl, {
       headers: { Authorization: `token ${token}` },
     });
-    
+
     console.log(`fileRes:${fileRes}`);
+    debugger
+    // const fileData = await fileRes.json();
+    // const content = Buffer.from(fileData.content, 'base64').toString();
+    // const jobs = JSON.parse(content);
 
     const fileData = await fileRes.json();
-    const content = Buffer.from(fileData.content, 'base64').toString();
-    const jobs = JSON.parse(content);
+    debugger
+    let jobs = [];
+    if (fileData.content) {
+      const content = Buffer.from(fileData.content, 'base64').toString();
+      debugger
+      jobs = JSON.parse(content);
+    }
 
     jobs.push(newJob);
     const updatedContent = Buffer.from(JSON.stringify(jobs, null, 2)).toString("base64");
