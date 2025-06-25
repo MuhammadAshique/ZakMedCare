@@ -22,10 +22,7 @@ exports.handler = async (event) => {
 
     console.log(`fileRes:${fileRes}`);
     debugger
-    // const fileData = await fileRes.json();
-    // const content = Buffer.from(fileData.content, 'base64').toString();
-    // const jobs = JSON.parse(content);
-
+    
     const fileData = await fileRes.json();
     debugger
     let jobs = [];

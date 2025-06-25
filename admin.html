@@ -225,12 +225,8 @@
     </div>
 
     <script>
-        // Admin credentials
-        const adminUser = "zakir";
-        const adminPass = "zakir123";
-
-        // Load remembered credentials if available
         $(document).ready(function () {
+            let jobs = [];
             if (localStorage.getItem("zakmedcare_admin_user")) {
                 $('#username').val(localStorage.getItem("zakmedcare_admin_user"));
             }
@@ -241,15 +237,24 @@
             renderAdminJobList();
         });
 
-        function showError(msg) {
-            $("#loginError").text(msg).fadeIn(200).removeClass("hidden");
-        }
-        function hideError() {
-            $("#loginError").fadeOut(100, function () { $(this).addClass("hidden"); });
+        async function uploadImageToCloudinary(file) {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "job_images"); // Make sure this is your actual preset
+            formData.append("folder", "jobs"); // Optional folder
+
+            const response = await fetch("https://api.cloudinary.com/v1_1/dsubuknl7/image/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error("Upload failed");
+
+            const data = await response.json();
+            return data.secure_url;
         }
 
-        // Login Handling
-        $('#loginBtn').click(function () {
+        $('#loginBtn').click(async function () {
             hideError();
             $('#loginBox input[type="text"], #loginBox input[type="password"]').removeClass('form-error');
             if (!$('#username').val().trim()) {
@@ -257,34 +262,39 @@
                 showError("Please enter username.");
                 return;
             }
+
             if (!$('#password').val().trim()) {
                 $('#password').addClass('form-error');
                 showError("Please enter password.");
                 return;
             }
-            const user = $('#username').val();
-            const pass = $('#password').val();
-            if (user === adminUser && pass === adminPass) {
-                // Remember me functionality
-                if ($('#rememberMe').is(':checked')) {
-                    localStorage.setItem("zakmedcare_admin_user", user);
-                    localStorage.setItem("zakmedcare_admin_pass", pass);
-                } else {
-                    localStorage.removeItem("zakmedcare_admin_user");
-                    localStorage.removeItem("zakmedcare_admin_pass");
-                }
-                $('#loginBox').fadeOut(200, function () {
-                    $('#uploadSection').fadeIn(300);
-                    $('#adminJobListSection').fadeIn(300);
-                    $('#backToWebsiteWrap').hide(); // Hide back button below login after login
+
+            try {
+                const res = await fetch('/.netlify/functions/validateAdmin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user, pass })
                 });
-                renderAdminJobList();
-            } else {
-                showError("❌ Invalid credentials!");
+
+                const result = await res.json();
+
+                if (result.success) {
+                    // Proceed to show admin panel
+                    $('#loginBox').fadeOut(200, function () {
+                        $('#uploadSection').fadeIn(300);
+                        $('#adminJobListSection').fadeIn(300);
+                        $('#backToWebsiteWrap').hide();
+                    });
+                    renderAdminJobList();
+                } else {
+                    showError("❌ Invalid credentials!");
+                }
+            } catch (err) {
+                console.error("Login error:", err);
+                showError("⚠️ Something went wrong while logging in.");
             }
         });
 
-        // Show image preview
         $("#imageInput").on("change", function () {
             const input = this;
             if (input.files && input.files[0]) {
@@ -306,17 +316,6 @@
             $("#imagePreviewWrap").addClass("hidden");
         });
 
-        // Modal functions for previewing image large
-        function showImgModal(src) {
-            $("#modalImage").attr("src", src);
-            $("#imgModal").removeClass("hidden");
-            document.body.style.overflow = 'hidden';
-        }
-        function closeImgModal() {
-            $("#imgModal").addClass("hidden");
-            $("#modalImage").attr("src", "");
-            document.body.style.overflow = '';
-        }
         window.showImgModal = showImgModal;
         window.closeImgModal = closeImgModal;
         document.addEventListener('keydown', function (e) {
@@ -324,9 +323,10 @@
         });
 
         // Job Posting Form Submission - No fields are mandatory!
-        $('#uploadForm').submit(function (e) {
+        $('#uploadForm').submit(async function (e) {
+            debugger
             e.preventDefault();
-
+            debugger
             const formData = new FormData(this);
             // Get selected licenses as an array
             const licenses = [];
@@ -339,17 +339,33 @@
 
             // Read image as Base64 so it can be displayed on the public page (demo purpose)
             let reader;
+            // if ($("#imageInput")[0].files[0]) {
+            //     reader = new FileReader();
+            //     reader.onload = function (e) {
+            //         saveJob(formData, e.target.result);
+            //     };
+            //     reader.readAsDataURL($("#imageInput")[0].files[0]);
+            // } else {
+            //     saveJob(formData, "");
+            // }
+
             if ($("#imageInput")[0].files[0]) {
-                reader = new FileReader();
-                reader.onload = function (e) {
-                    saveJob(formData, e.target.result);
-                };
-                reader.readAsDataURL($("#imageInput")[0].files[0]);
+                try {
+                    debugger
+                    const cloudImageUrl = await uploadImageToCloudinary($("#imageInput")[0].files[0]);
+                    debugger
+                    saveJob(formData, cloudImageUrl);
+                } catch (err) {
+                    console.error("Cloudinary upload failed:", err);
+                    $('#uploadStatus').text("⚠️ Image upload failed. Try again.").addClass('text-red-600');
+                    btn.prop('disabled', false).text('Submit Job');
+                }
             } else {
                 saveJob(formData, "");
             }
 
             function saveJob(formData, imgSrc) {
+                debugger
                 // Check if all fields are empty
                 const fields = [
                     formData.get('title'),
@@ -376,6 +392,7 @@
                     jobs = JSON.parse(localStorage.getItem('jobs'));
                 }
                 const job = {
+                    id: Date.now().toString(), // Unique ID for each job
                     title: formData.get('title') || "",
                     position: formData.get('position') || "",
                     industry: formData.get('industry') || "",
@@ -388,6 +405,8 @@
                     description: formData.get('description') || "",
                     image: imgSrc
                 };
+                console.log(job);
+                debugger
                 jobs.unshift(job); // Add to top
                 localStorage.setItem('jobs', JSON.stringify(jobs));
                 updateJobsJsonOnServer(jobs);
@@ -401,80 +420,117 @@
                 }, 1200);
             }
         });
+        window.editJob = editJob;
+        window.deleteJob = deleteJob;
 
-        // Admin Job List rendering
-        function renderAdminJobList() {
-            let jobs = [];
-            if (localStorage.getItem('jobs')) {
-                jobs = JSON.parse(localStorage.getItem('jobs'));
+        // FUNCTIONS
+        async function updateJobsJsonOnServer(jobs) {
+            try {
+                const response = await fetch('/.netlify/functions/updateJobsJson', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jobs)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ Server responded with error:', errorText);
+                    alert('Failed to update jobs.json on server.');
+                } else {
+                    console.log('✅ jobs.json successfully updated on GitHub!');
+                    alert('Jobs saved to server successfully.');
+                }
+            } catch (err) {
+                console.error('⚠️ Error calling server function:', err);
+                alert('Something went wrong while saving jobs to the server.');
             }
+        }
+        function showError(msg) {
+            $("#loginError").text(msg).fadeIn(200).removeClass("hidden");
+        }
+        function hideError() {
+            $("#loginError").fadeOut(100, function () { $(this).addClass("hidden"); });
+        }
+
+        // Modal functions for previewing image large
+        function showImgModal(src) {
+            $("#modalImage").attr("src", src);
+            $("#imgModal").removeClass("hidden");
+            document.body.style.overflow = 'hidden';
+        }
+        function closeImgModal() {
+            $("#imgModal").addClass("hidden");
+            $("#modalImage").attr("src", "");
+            document.body.style.overflow = '';
+        }
+        // Admin Job List rendering
+        async function renderAdminJobList() {
+            const jobs = await fetchJobsFromServer();
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+
             const container = $("#adminJobList");
             if (!jobs.length) {
                 container.html(`<p class="text-center text-gray-500">You have not posted any jobs yet.</p>`);
                 return;
             }
+
             container.html(jobs.map((job, idx) => {
                 // If only image is present (all other fields empty), show image big
                 const fields = ["title", "position", "industry", "location", "salary", "experience", "candidates", "license", "gender", "description"];
                 const isImageOnly = job.image && fields.every(f => !job[f] || job[f].toString().trim() === "");
                 if (isImageOnly) {
-                    return `
-            <div class="border-b py-6 flex flex-col items-center">
-              <img src="${job.image}" alt="Logo" class="w-full max-w-2xl h-96 object-contain rounded border shadow cursor-pointer mb-4" onclick="showImgModal('${job.image}')">
-              <div class="flex gap-2 mt-2">
-                <button class="job-action-btn text-blue-700 border hover:bg-blue-50 px-3 py-1 rounded font-medium text-sm" onclick="editJob(${idx})">
-                  Edit
-                </button>
-                <button class="job-action-btn text-red-600 border hover:bg-red-50 px-3 py-1 rounded font-medium text-sm" onclick="deleteJob(${idx})">
-                  Delete
-                </button>
-              </div>
-            </div>
-          `;
+                    return `<div class="border-b py-6 flex flex-col items-center">
+                                <img src="${job.image}" alt="Logo" class="w-full max-w-2xl h-96 object-contain rounded border shadow cursor-pointer mb-4" onclick="showImgModal('${job.image}')">
+                                <div class="flex gap-2 mt-2">
+                                    <button class="job-action-btn text-blue-700 border hover:bg-blue-50 px-3 py-1 rounded font-medium text-sm" onclick="editJob(${job.id})">
+                                    Edit
+                                    </button>
+                                    <button class="job-action-btn text-red-600 border hover:bg-red-50 px-3 py-1 rounded font-medium text-sm" onclick="deleteJob(${job.id})">
+                                    Delete
+                                    </button>
+                                </div>
+                            </div>`;
                 }
                 // Otherwise, regular job with details
-                return `
-          <div class="border-b py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-            <div class="flex items-center gap-4 flex-1">
-              ${job.image ? `<img src="${job.image}" alt="Logo" class="w-14 h-14 object-cover rounded border cursor-pointer" onclick="showImgModal('${job.image}')">` : ''}
-              <div>
-                <div class="font-semibold text-lg text-blue-700">${job.title || '<span class="text-gray-400">No Title</span>'}</div>
-                <div class="text-gray-600">${job.position || ''} ${job.industry ? '· ' + job.industry : ''} ${job.location ? '· ' + job.location : ''}</div>
-                <div class="text-xs text-gray-400">${job.salary ? 'Salary: ' + job.salary + ' AED' : ''}</div>
-              </div>
-            </div>
-            <div class="flex gap-2 mt-2 md:mt-0">
-              <button class="job-action-btn text-blue-700 border hover:bg-blue-50 px-3 py-1 rounded font-medium text-sm" onclick="editJob(${idx})">
-                Edit
-              </button>
-              <button class="job-action-btn text-red-600 border hover:bg-red-50 px-3 py-1 rounded font-medium text-sm" onclick="deleteJob(${idx})">
-                Delete
-              </button>
-            </div>
-          </div>
-        `;
+                return `<div class="border-b py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                            <div class="flex items-center gap-4 flex-1">
+                            ${job.image ? `<img src="${job.image}" alt="Logo" class="w-14 h-14 object-cover rounded border cursor-pointer" onclick="showImgModal('${job.image}')">` : ''}
+                            <div>
+                                <div class="font-semibold text-lg text-blue-700">${job.title || '<span class="text-gray-400">No Title</span>'}</div>
+                                <div class="text-gray-600">${job.position || ''} ${job.industry ? '· ' + job.industry : ''} ${job.location ? '· ' + job.location : ''}</div>
+                                <div class="text-xs text-gray-400">${job.salary ? 'Salary: ' + job.salary + ' AED' : ''}</div>
+                            </div>
+                            </div>
+                            <div class="flex gap-2 mt-2 md:mt-0">
+                            <button class="job-action-btn text-blue-700 border hover:bg-blue-50 px-3 py-1 rounded font-medium text-sm" onclick="editJob(${job.id})">
+                                Edit
+                            </button>
+                            <button class="job-action-btn text-red-600 border hover:bg-red-50 px-3 py-1 rounded font-medium text-sm" onclick="deleteJob(${job.id})">
+                                Delete
+                            </button>
+                            </div>
+                        </div>`;
             }).join(''));
         }
 
         // Delete Job function
-        function deleteJob(idx) {
+        async function deleteJob(jobId) {
             if (!confirm("Are you sure you want to delete this job posting?")) return;
-            let jobs = [];
-            if (localStorage.getItem('jobs')) {
-                jobs = JSON.parse(localStorage.getItem('jobs'));
-            }
-            jobs.splice(idx, 1);
-            localStorage.setItem('jobs', JSON.stringify(jobs));
-            renderAdminJobList();
+
+            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+            const updatedJobs = jobs.filter(j => j.id !== jobId);
+            localStorage.setItem('jobs', JSON.stringify(updatedJobs));
+            updateJobsJsonOnServer(updatedJobs).then(renderAdminJobList);
         }
 
-        // Edit Job function (basic demo: loads job data into form for editing and removes the old job)
-        function editJob(idx) {
-            let jobs = [];
-            if (localStorage.getItem('jobs')) {
-                jobs = JSON.parse(localStorage.getItem('jobs'));
-            }
-            const job = jobs[idx];
+        async function editJob(idx) {
+            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+            const job = jobs.find(j => j.id === jobId);
+            if (!job) return;
+
+
             // Prefill the form
             $('#uploadForm').find('[name=title]').val(job.title);
             $('#uploadForm').find('[name=position]').val(job.position);
@@ -494,62 +550,46 @@
             }
             $("#imagePreviewWrap").addClass("hidden");
             $("#imageInput").val('');
-            // Remove the old job
-            jobs.splice(idx, 1);
-            localStorage.setItem('jobs', JSON.stringify(jobs));
-            renderAdminJobList();
+
+            const updatedJobs = jobs.filter(j => j.id !== jobId);
+            localStorage.setItem('jobs', JSON.stringify(updatedJobs));
+            updateJobsJsonOnServer(updatedJobs).then(renderAdminJobList);
+
             // Scroll to form
             $('html,body').animate({ scrollTop: $("#uploadSection").offset().top - 20 }, 400);
         }
-        window.editJob = editJob;
-        window.deleteJob = deleteJob;
 
-        
-    async function updateJobsJsonOnServer(jobs) {
-      try {
-        const response = await fetch('/.netlify/functions/updateJobsJson', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(jobs)
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('❌ Server responded with error:', errorText);
-          alert('Failed to update jobs.json on server.');
-        } else {
-          console.log('✅ jobs.json successfully updated on GitHub!');
-          alert('Jobs saved to server successfully.');
+        async function fetchJobsFromServer() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/MuhammadAshique/ZakMedCare/main/js/jobs.json');
+                if (!response.ok) throw new Error("Failed to fetch jobs.json");
+                const jobs = await response.json();
+                return jobs;
+            } catch (err) {
+                console.error("❌ Failed to fetch jobs from GitHub:", err);
+                return [];
+            }
         }
-      } catch (err) {
-        console.error('⚠️ Error calling server function:', err);
-        alert('Something went wrong while saving jobs to the server.');
-      }
-    }
 
-    </script>
-    <script>
-        // Example new job data
-        const newJob = {
-            title: "Registered Nurse",
-            location: "Abu Dhabi",
-            image: "https://res.cloudinary.com/dsubuknl7/image/upload/jobs/filename.jpg"
-        };
 
-        fetch('/.netlify/functions/updateJobsJson', {
-            method: "POST",
-            body: JSON.stringify({ newJob })
-        }).then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Job added!");
-                } else {
-                    alert("Failed to add job");
-                }
-            });
+        // // Example new job data
+        // const newJob = {
+        //     title: "Registered Nurse",
+        //     location: "Abu Dhabi",
+        //     image: "https://res.cloudinary.com/dsubuknl7/image/upload/jobs/filename.jpg"
+        // };
 
+        // fetch('/.netlify/functions/updateJobsJson', {
+        //     method: "POST",
+        //     body: JSON.stringify({ newJob })
+        // }).then(res => res.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             alert("Job added!");
+        //         } else {
+        //             alert("Failed to add job");
+        //         }
+        //     });
 
     </script>
 
