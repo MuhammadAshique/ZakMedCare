@@ -1,5 +1,7 @@
 console.log("updateJobsJson.js ran successfully!");
 const fetch = require('node-fetch');
+console.log(`fetch:${fetch}`);
+
 exports.handler = async (event) => {
   try {
     const token = process.env.GITHUB_TOKEN;
@@ -7,12 +9,18 @@ exports.handler = async (event) => {
     const branch = "main";
     const filePath = "js/jobs.json";
 
+    console.log(`token:${token} repo:${repo} branch:${branch} filepath:${filePath}`)
+    console.log(`event.body: ${event.body}`)
+
     const { newJob } = JSON.parse(event.body);
 
     const fileUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+    console.log(`fileUrl:${fileUrl}`);
     const fileRes = await fetch(fileUrl, {
       headers: { Authorization: `token ${token}` },
     });
+    
+    console.log(`fileRes:${fileRes}`);
 
     const fileData = await fileRes.json();
     const content = Buffer.from(fileData.content, 'base64').toString();
