@@ -488,7 +488,7 @@
 
   <script>
     let jobs = [];
-    fetch('/jobs.json')
+    fetch('/js/jobs.json')
       .then(res => res.json())
       .then(data => {
         jobs = data || [];
