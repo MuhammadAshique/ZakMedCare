@@ -512,39 +512,37 @@
         return;
       }
       container.innerHTML = jobs.map((job, idx) => {
+        const imgSrc = typeof job.image === 'string' ? job.image || "" : (job.image && job.image.imageUrl) || "";
+        console.log(imgSrc)
         // Case 1: Only image is present
         if (isImageOnly(job)) {
-          return `
-          <div class="bg-white rounded-xl shadow-md p-0 flex flex-col items-center overflow-hidden">
-            <img src="${job.image}" alt="Job Image" class="w-full h-80 object-contain cursor-pointer" onclick="showImgModal('${encodeURIComponent(job.image)}')">
-          </div>
-        `;
+          return `<div class="bg-white rounded-xl shadow-md p-0 flex flex-col items-center overflow-hidden">
+                    <img src="${imgSrc}" alt="Job Image" class="w-full h-80 object-contain cursor-pointer" onclick="showImgModal('${encodeURIComponent(imgSrc)}')">
+                  </div>`;
         }
         // Case 2: Regular job card with image (if any)
-        return `
-        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
-          ${job.image ? `<img src="${job.image}" alt="Company Logo" class="w-24 h-24 object-cover rounded-lg border mb-3 cursor-pointer" onclick="showImgModal('${encodeURIComponent(job.image)}')">` : ''}
-          <div class="flex-1 w-full flex flex-col items-center">
-            <div class="flex flex-wrap items-center gap-2 mb-1 justify-center">
-              <span class="text-lg font-semibold text-blue-700">${job.title || ''}</span>
-              ${job.position ? `<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded">${job.position}</span>` : ''}
-              ${job.industry ? `<span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">${job.industry}</span>` : ''}
-            </div>
-            <div class="text-gray-700 font-medium mb-1 text-center">
-              ${job.location || ''}${job.salary ? ` &middot; <span class="text-green-700">${job.salary} AED</span>` : ''}
-            </div>
-            <div class="text-gray-500 text-sm mb-1 text-center">
-              ${job.experience ? `<b>Experience:</b> ${job.experience} &middot; ` : ''}
-              ${job.candidates ? `<b>Needed:</b> ${job.candidates} &middot; ` : ''}
-              ${job.gender ? `<b>Gender:</b> ${job.gender}` : ''}
-            </div>
-            <div class="text-gray-500 text-sm mb-1 text-center">
-              ${job.license ? `<b>License:</b> ${job.license}` : ''}
-            </div>
-            <div class="text-gray-600 mt-2 text-center">${job.description || ''}</div>
-          </div>
-        </div>
-      `;
+        return `<div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+                  ${imgSrc ? `<img src="${imgSrc}" alt="Company Logo" class="w-24 h-24 object-cover rounded-lg border mb-3 cursor-pointer" onclick="showImgModal('${encodeURIComponent(imgSrc)}')">` : ''}
+                  <div class="flex-1 w-full flex flex-col items-center">
+                    <div class="flex flex-wrap items-center gap-2 mb-1 justify-center">
+                      <span class="text-lg font-semibold text-blue-700">${job.title || ''}</span>
+                      ${job.position ? `<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded">${job.position}</span>` : ''}
+                      ${job.industry ? `<span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded">${job.industry}</span>` : ''}
+                    </div>
+                    <div class="text-gray-700 font-medium mb-1 text-center">
+                      ${job.location || ''}${job.salary ? ` &middot; <span class="text-green-700">${job.salary} AED</span>` : ''}
+                    </div>
+                    <div class="text-gray-500 text-sm mb-1 text-center">
+                      ${job.experience ? `<b>Experience:</b> ${job.experience} &middot; ` : ''}
+                      ${job.candidates ? `<b>Needed:</b> ${job.candidates} &middot; ` : ''}
+                      ${job.gender ? `<b>Gender:</b> ${job.gender}` : ''}
+                    </div>
+                    <div class="text-gray-500 text-sm mb-1 text-center">
+                      ${job.license ? `<b>License:</b> ${job.license}` : ''}
+                    </div>
+                    <div class="text-gray-600 mt-2 text-center">${job.description || ''}</div>
+                  </div>
+                </div>`;
       }).join('');
     }
     $("#imageInput").on("change", function () {

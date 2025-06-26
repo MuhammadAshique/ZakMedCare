@@ -349,6 +349,7 @@
         // FUNCTIONS
 
         async function saveJob(formData) {
+            const btn = $(this).find('button[type="submit"]');
             debugger
             // Read image as Base64 so it can be displayed on the public page (demo purpose)
             let cloudImageUrl = "";
@@ -428,12 +429,19 @@
             }
 
             container.html(jobs.map((job, idx) => {
+                const imgSrc = typeof job.image === 'string'
+                    ? job.image || ""
+                    : (job.image && job.image.imageUrl) || "";
+
+                console.log(imgSrc)
                 // If only image is present (all other fields empty), show image big
                 const fields = ["title", "position", "industry", "location", "salary", "experience", "candidates", "license", "gender", "description"];
                 const isImageOnly = job.image && fields.every(f => !job[f] || job[f].toString().trim() === "");
                 if (isImageOnly) {
+
+
                     return `<div class="border-b py-6 flex flex-col items-center">
-                                <img src="${job.image}" alt="Logo" class="w-full max-w-2xl h-96 object-contain rounded border shadow cursor-pointer mb-4" onclick="showImgModal('${job.image}')">
+                                <img src="${imgSrc}" alt="Logo" class="w-full max-w-2xl h-96 object-contain rounded border shadow cursor-pointer mb-4" onclick="showImgModal('${imgSrc}')">
                                 <div class="flex gap-2 mt-2">
                                     <button class="job-action-btn text-blue-700 border hover:bg-blue-50 px-3 py-1 rounded font-medium text-sm" onclick="editJob(${job.id})">
                                     Edit
@@ -447,7 +455,7 @@
                 // Otherwise, regular job with details
                 return `<div class="border-b py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                             <div class="flex items-center gap-4 flex-1">
-                            ${job.image ? `<img src="${job.image}" alt="Logo" class="w-14 h-14 object-cover rounded border cursor-pointer" onclick="showImgModal('${job.image}')">` : ''}
+                            ${imgSrc ? `<img src="${imgSrc}" alt="Logo" class="w-14 h-14 object-cover rounded border cursor-pointer" onclick="showImgModal('${imgSrc}')">` : ''}
                             <div>
                                 <div class="font-semibold text-lg text-blue-700">${job.title || '<span class="text-gray-400">No Title</span>'}</div>
                                 <div class="text-gray-600">${job.position || ''} ${job.industry ? '· ' + job.industry : ''} ${job.location ? '· ' + job.location : ''}</div>
@@ -564,7 +572,7 @@
 
                         const result = await res.json();
                         if (!res.ok) throw new Error(result.message || "Upload failed");
-                        resolve({ imageUrl: result.imageUrl, uniqueID: result.uniqueID });
+                        resolve({ imageUrl: result.imageUrl, uniqueID: result.public_id });
                     } catch (err) {
                         console.error("Upload error:", err);
                         reject(err);
