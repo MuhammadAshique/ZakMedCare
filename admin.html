@@ -475,7 +475,8 @@
             if (!confirm("Are you sure you want to delete this job posting?")) return;
 
             const updatedJobs = jobs.filter(j => j.id !== jobId);
-            updateJobsJsonOnServer(updatedJobs).then(renderAdminJobList);
+            jobs = await syncJobsWithServer(updatedJobs);
+            renderAdminJobList();
         }
 
         async function editJob(idx) {
