@@ -491,6 +491,7 @@
 
     $(document).ready(async function () {
       jobs = await fetchJobsFromServer();
+      renderJobs()
     });
 
     async function fetchJobsFromServer() {
