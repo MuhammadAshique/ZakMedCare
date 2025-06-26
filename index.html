@@ -489,21 +489,21 @@
   <script>
     let jobs = [];
 
-    $(document).ready(function () {
-      fetch('/js/jobs.json')
-        .then(res => res.json())
-        .then(data => {
-          jobs = data || [];
-          renderJobs();
-        })
-        .catch(err => {
-          console.error("Failed to load jobs from GitHub:", err);
-          document.getElementById('jobsList').innerHTML = `<p class="text-red-600 text-center">Failed to load job listings.</p>`;
-        });
+    $(document).ready(async function () {
+      jobs = await fetchJobsFromServer();
     });
 
-
-
+    async function fetchJobsFromServer() {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/MuhammadAshique/ZakMedCare/main/js/jobs.json');
+        if (!response.ok) throw new Error("Failed to fetch jobs.json");
+        const jobs = await response.json();
+        return jobs;
+      } catch (err) {
+        console.error("❌ Failed to fetch jobs from GitHub:", err);
+        return [];
+      }
+    }
 
     function isImageOnly(job) {
       // Only image is present, all other fields are empty or falsy

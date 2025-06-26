@@ -609,7 +609,8 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ jobs: mergedJobs })
+                        // body: JSON.stringify({ jobs: mergedJobs })
+                        body: JSON.stringify(mergedJobs)
                     });
 
                     if (!saveResponse.ok) {
