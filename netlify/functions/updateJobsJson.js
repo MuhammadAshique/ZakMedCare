@@ -8,7 +8,8 @@ exports.handler = async (event) => {
     const repo = process.env.REPO_NAME;
     const branch = "main";
     const filePath = "js/jobs.json";
-
+    
+    console.log("updateJobsJson.js ran successfully!");
     console.log(`token:${token} repo:${repo} branch:${branch} filepath:${filePath}`)
     console.log(`event.body: ${event.body}`)
 
@@ -16,13 +17,31 @@ exports.handler = async (event) => {
 
     const fileUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
     console.log(`fileUrl:${fileUrl}`);
+
+
+    // const fileRes = await fetch(fileUrl, {
+    //   headers: { Authorization: `token ${token}` },
+    // });
+
     const fileRes = await fetch(fileUrl, {
-      headers: { Authorization: `token ${token}` },
+      headers: {
+        Authorization: `token ${token}`,
+        Accept: 'application/vnd.github.v3+json'
+      }
     });
+
+    if (!fileRes.ok) {
+      const errorText = await fileRes.text(); // Read raw error message
+      console.error('Failed to fetch file from GitHub:', fileRes.status, errorText);
+      return {
+        statusCode: fileRes.status,
+        body: JSON.stringify({ message: 'Failed to fetch file', error: errorText }),
+      };
+    }
 
     console.log(`fileRes:${fileRes}`);
     debugger
-    
+
     const fileData = await fileRes.json();
     debugger
     let jobs = [];

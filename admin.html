@@ -351,7 +351,7 @@
         async function saveJob(formData) {
             debugger
             // Read image as Base64 so it can be displayed on the public page (demo purpose)
-            let cloudImageUrl;
+            let cloudImageUrl = "";
             const uniqueID = Date.now().toString();
             if ($("#imageInput")[0].files[0]) {
                 try {
@@ -380,7 +380,7 @@
                 license: formData.get('license') || "",
                 gender: formData.get('gender') || "",
                 description: formData.get('description') || "",
-                image: cloudImageUrl
+                image: cloudImageUrl || ""
             };
             console.log(job);
             debugger

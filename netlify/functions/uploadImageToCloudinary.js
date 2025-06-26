@@ -48,7 +48,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({
         imageUrl: data.secure_url,
-        uniqueID: data.public_id
+        public_id: data.public_id
       })
     };
   } catch (err) {
