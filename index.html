@@ -488,16 +488,22 @@
 
   <script>
     let jobs = [];
-    fetch('/js/jobs.json')
-      .then(res => res.json())
-      .then(data => {
-        jobs = data || [];
-        renderJobs();
-      })
-      .catch(err => {
-        console.error("Failed to load jobs from GitHub:", err);
-        document.getElementById('jobsList').innerHTML = `<p class="text-red-600 text-center">Failed to load job listings.</p>`;
-      });
+
+    $(document).ready(function () {
+      fetch('/js/jobs.json')
+        .then(res => res.json())
+        .then(data => {
+          jobs = data || [];
+          renderJobs();
+        })
+        .catch(err => {
+          console.error("Failed to load jobs from GitHub:", err);
+          document.getElementById('jobsList').innerHTML = `<p class="text-red-600 text-center">Failed to load job listings.</p>`;
+        });
+    });
+
+
+
 
     function isImageOnly(job) {
       // Only image is present, all other fields are empty or falsy
