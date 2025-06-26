@@ -1,4 +1,7 @@
+console.log("uploadImageToCloudinary.js ran successfully!");
 const fetch = require('node-fetch');
+console.log(`fetch:${fetch}`);
+
 const FormData = require('form-data');
 
 exports.handler = async (event) => {
